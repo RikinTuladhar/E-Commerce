@@ -1,151 +1,118 @@
-import React from "react";
-import { Carousel, initTWE } from "tw-elements";
-initTWE({ Carousel });
+import React, { useState } from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../Css/slider.css"
+import {
+  faPenToSquare,
+  faMagnifyingGlass,
+  faUserPlus,
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 const Slider = () => {
-  return (
-    <div
-      id="carouselExampleCaptions"
-      class="relative"
-      data-twe-carousel-init
-      data-twe-ride="carousel"
-    >
-      <div
-        class="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
-        data-twe-carousel-indicators
-      >
-        <button
-          type="button"
-          data-twe-target="#carouselExampleCaptions"
-          data-twe-slide-to="0"
-          data-twe-carousel-active
-          class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-twe-target="#carouselExampleCaptions"
-          data-twe-slide-to="1"
-          class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-twe-target="#carouselExampleCaptions"
-          data-twe-slide-to="2"
-          class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
-          aria-label="Slide 3"
-        ></button>
-      </div>
-
-      <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
-        <div
-          class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-          data-twe-carousel-active
-          data-twe-carousel-item
-          style="backface-visibility: hidden"
-        >
-          <img
-            src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(15).jpg"
-            class="block w-full"
-            alt="..."
-          />
-          <div class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-            <h5 class="text-xl">First slide label</h5>
-            <p>Some representative placeholder content for the first slide.</p>
-          </div>
+    const [Slider, setSlider] = useState(1);
+  
+    const handleSlider = (slideNum) => {
+      setSlider(slideNum);
+    };
+    const handleNextSlide = () => {
+      const nextSlide = Slider === 3 ? 1 : Slider + 1;
+      setSlider(nextSlide);
+    };
+  
+    const handlePrevSlide = () => {
+      const prevSlide = Slider === 1 ? 3 : Slider - 1;
+      setSlider(prevSlide);
+    };
+    return (
+      <>
+        <div className="wrapper">
+          {Slider === 1 && (
+            <div
+              className={`slider ${Slider === 1 ? "active" : ""}`}
+              id="content1"
+            >
+              <div className="content">
+                <h1 className="slider-heading hedvig">Make Your</h1>
+                <h2 className="slider-heading2 hedvig">
+                  <span>First Post </span>
+                </h2>
+                <h4 className="slider-heading3">
+                  🌟 Hey there, Ever had that thought or idea swirling in your
+                  mind, itching to burst into the digital world? Well, guess what?
+                  Now's the perfect time to let it out! Ready to make your mark?
+                  We're excited to welcome your first post. 💫
+                </h4>
+              
+                  <a className="btns" href="/Login">
+                    Post Blog <FontAwesomeIcon icon={faPenToSquare} />
+                  </a>
+            
+              </div>
+              {/* <div className="Slider_img_div">
+                <img className="Slider_img" src={Post_img}/>
+                <img className="Slider_img" src={Flw}/>
+              </div> */}
+            </div>
+          )}
+          {Slider === 2 && (
+            <div
+              className={`slider ${Slider === 2 ? "active" : ""}`}
+              id="content2"
+            >
+              <div className="content">
+                <h1 className="slider-heading">Search</h1>
+                <h2 className="slider-heading2">
+                  <span>Contents </span>
+                </h2>
+                <h4 className="slider-heading3">
+                  🎉 Embrace the magic of curiosity, Dive into the sea of
+                  knowledge, and let the waves of inspiration carry you to new
+                  shores. Discover the endless possibilities that unfold when you
+                  seek to learn and explore. Happy searching! 💕
+                </h4>
+                <a href="/Blogs" className="btns">
+                  Search <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </a>
+              </div>
+              {/* <div className="Slider_img_div">
+                <img className="Slider_img" src={Seach_Con}/>
+              </div> */}
+            </div>
+          )}
+          {Slider === 3 && (
+            <div
+              className={`slider ${Slider === 3 ? "active" : ""}`}
+              id="content3"
+            >
+              <div className="content">
+                <h1 className="slider-heading">Find new</h1>
+                <h2 className="slider-heading2">
+                  <span>Connections</span>
+                </h2>
+                <h4 className="slider-heading3">
+                  🌻 Step into the your realm, where every click unveils
+                  opportunities to forge new connections and create meaningful
+                  bonds. Discover the joy of connecting with like-minded souls,
+                  like a sweet melody in the symphony of your digital journey.🤗
+                </h4>
+                <a href=''  className="btns">
+                  Find People <FontAwesomeIcon icon={faUserPlus} />
+                </a>
+              </div>
+              {/* <div className="Slider_img_div">
+                <img className="Slider_img" src={Find_ppl}/>
+              </div> */}
+            </div>
+          )}
+          <button className="chevron-btn leftx" onClick={handlePrevSlide}>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+          <button className="chevron-btn rightx" onClick={handleNextSlide}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </button>
         </div>
+      </>
+    );
+  };
 
-        <div
-          class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-          data-twe-carousel-item
-          style="backface-visibility: hidden"
-        >
-          <img
-            src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(22).jpg"
-            class="block w-full"
-            alt="..."
-          />
-          <div class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-            <h5 class="text-xl">Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
-          </div>
-        </div>
-
-        <div
-          class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-          data-twe-carousel-item
-          style={{ backfaceVisibility: "hidden" }}
-        >
-          {" "}
-          {/* Corrected style attribute */}
-          <img
-            src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(23).jpg"
-            class="block w-full"
-            alt="..."
-          />
-          <div class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-            <h5 class="text-xl">Third slide label</h5>
-            <p>Some representative placeholder content for the third slide.</p>
-          </div>
-        </div>
-      </div>
-
-      <button
-        class="absolute bottom-0 left-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
-        type="button"
-        data-twe-target="#carouselExampleCaptions"
-        data-twe-slide="prev"
-      >
-        <span class="inline-block h-8 w-8">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="h-6 w-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15.75 19.5L8.25 12l7.5-7.5"
-            />
-          </svg>
-        </span>
-        <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-          Previous
-        </span>
-      </button>
-
-      <button
-        class="absolute bottom-0 right-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
-        type="button"
-        data-twe-target="#carouselExampleCaptions"
-        data-twe-slide="next"
-      >
-        <span class="inline-block h-8 w-8">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="h-6 w-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </span>
-        <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-          Next
-        </span>
-      </button>
-    </div>
-  );
-};
-
-export default Slider;
+export default Slider
