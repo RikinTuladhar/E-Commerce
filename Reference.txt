@@ -1,0 +1,5 @@
+Bg primary- bg-[#f7f7f7]
+Bg- body color  - bg-[#ececec] 
+bg- container color - bg-[#c9c9c9a9]
+bg-card color - bg-[#F6F5F2]
+Button Color  - 

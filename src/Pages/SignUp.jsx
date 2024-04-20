@@ -1,5 +1,5 @@
 import React from 'react'
-import './LogIn.css'
+import '../Css/LogIn.css'
 import { FaFacebookF } from "react-icons/fa";
 import { FaGooglePlusG } from "react-icons/fa6";
 const SignUp = () => {

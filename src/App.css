@@ -1,8 +1,8 @@
 .header{
-    background-color: hsl(31, 100%, 47%);
+    background-color: #f7f7f7;
   }
   .nav-link {
-    color: white !important;
+    color: black !important;
   }
   .nav > .nav-item:hover{
   background-color: rgba(65, 64, 64, 0.5);
@@ -10,7 +10,7 @@
   
   }
   .sidebar{
-    background-color: aliceblue;
+    background-color: black;
   }
   
   .logo{
