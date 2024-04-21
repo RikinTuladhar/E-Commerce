@@ -39,19 +39,19 @@ const Header = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link to={"/products"}
                   href="./Features"
                   className="px-2 nav-link link-body-emphasis"
                 >
-                  Features
-                </a>
+                  Product
+                </Link>
               </li>
               <li className="nav-item">
                 <a
                   href="./Product"
                   className="px-2 nav-link link-body-emphasis"
                 >
-                  Product
+                  Resell
                 </a>
               </li>
 

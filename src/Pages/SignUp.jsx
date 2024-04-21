@@ -1,8 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../Css/LogIn.css'
 import { FaFacebookF } from "react-icons/fa";
 import { FaGooglePlusG } from "react-icons/fa6";
 const SignUp = () => {
+    const [user,setUser] = useState({
+        fullname:"",
+        phonenumber:"",
+        passoword:""
+    })
+    const getData =(e)=>{
+        const {name,value}  = e.target
+        setUser({
+           ...user,
+            [name]:value
+        })
+    }
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        console.log(user);
+    }
   return (
  <>
   <div className="login-container" id='container'>
@@ -10,21 +26,17 @@ const SignUp = () => {
             <div className="login-title"><h3>Create your Daraz Account</h3>
         <div className="login-other">Already member? <a href="login">Login</a> here.</div>
         </div>
-        <form action="">
+        <form onSubmit={handleSubmit}>
             <div className="mod-login">
                 <div className="mod-login-col1">
                     <div className="mod-input mod-input-login">
                         <label htmlFor="">Phone Number</label>
-                        <input type="text" placeholder="Please enter your Phone Number" data-meta="Field" value=""/>
-                    </div>
-                    <div className="mod-input mod-input-login">
-                        <label htmlFor="">Verification Code from whatsApp</label>
-                        <input type="text" placeholder="Verification Code" data-meta="Field" value=""/>
+                        <input onChange={getData} name='phonenumber' type="text" placeholder="Please enter your Phone Number" data-meta="Field" />
                     </div>
                     {/* <span class="mod-login-change-sms-type">Get code via other methods </span> */}
                     <div className="mod-input mod-input-password">
                         <label htmlFor="">Password</label>
-                        <input type="password" placeholder="Please enter your password" data-meta="Field" value=""></input>
+                        <input onChange={getData} name='passoword' type="password" placeholder="Please enter your password" data-meta="Field" ></input>
                     </div>
                     <div className="mod-login-forgot">
                         <a href="#">Forgot your password?</a>
@@ -33,7 +45,7 @@ const SignUp = () => {
                 <div className="mod-login-col2">
                 <div className="mod-input mod-input-full-name">
                         <label htmlFor="">Full name</label>
-                        <input type="password" placeholder="Enter your first and last name" data-meta="Field" value=""></input>
+                        <input onChange={getData} name='fullname' type="text" placeholder="Enter your first and last name" data-meta="Field" ></input>
                     </div>
                     <div className="mod-login-btn">
                     <button type="submit" className="mod-button signup-btn">SIGN UP</button>

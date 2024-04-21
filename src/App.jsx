@@ -6,6 +6,8 @@ import HomePage from './Pages/HomePage';
 import Checkout from './Components/Checkout'; // Import the Checkout component
 import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
+import NotFound from './Pages/NotFound';
+import ProductPage from './Pages/ProductPage';
 function App() {
   const router = createBrowserRouter([
     {
@@ -27,8 +29,14 @@ function App() {
         {
           path: "/register",
           element:<SignUp/>
+        },{
+          path:"/products",
+          element:<ProductPage/>
         }
       ]
+    },{
+      path:"/*",
+      element:<NotFound/>
     }
   ]);
 

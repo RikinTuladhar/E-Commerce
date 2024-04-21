@@ -6,7 +6,7 @@ import CardContainer from './CardContainer'
 const Home = () => {
   return (
     <div>
-    <div className='relative w-full h-auto'>  <Slider/></div>
+    <div className='relative w-full h-auto'><Slider/></div>
       <CategoriesContainer/>
       <CardContainer/>
     </div>
