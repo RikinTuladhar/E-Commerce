@@ -8,6 +8,7 @@ import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
 import NotFound from './Pages/NotFound';
 import ProductPage from './Pages/ProductPage';
+import  ResellPage  from './Pages/ResellPage';
 function App() {
   const router = createBrowserRouter([
     {
@@ -32,6 +33,9 @@ function App() {
         },{
           path:"/products",
           element:<ProductPage/>
+        },{
+          path:"/resells",
+          element:<ResellPage/>
         }
       ]
     },{

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div>
-      <header className="py-3  header border-bottom">
+      <header className="py-3 header border-bottom">
         <div className="container flex-wrap d-flex justify-content-center align-items-center">
           <Link to={"/"}
            
@@ -27,7 +27,7 @@ const Header = () => {
               aria-label="Search"
             />
           </form>
-          <nav className="nav ml-10 flex justify-center items-center gap-5">
+          <nav className="flex items-center justify-center gap-5 ml-10 nav">
             <ul className="nav me-auto">
               <li className="nav-item">
                 <Link
@@ -47,12 +47,12 @@ const Header = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link to={"/resells"}
                   href="./Product"
                   className="px-2 nav-link link-body-emphasis"
                 >
                   Resell
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
@@ -65,7 +65,7 @@ const Header = () => {
               <li className="nav-item">
                 <Link
                   to="./login"
-                  className="px-2 nav-link link-body-emphasis flex justify-center items-center gap-2"
+                  className="flex items-center justify-center gap-2 px-2 nav-link link-body-emphasis"
                 >
                   <CiUser />
                   Login

@@ -23,8 +23,8 @@ const SignUp = () => {
  <>
   <div className="login-container" id='container'>
         <div className="login">
-            <div className="login-title"><h3>Create your Daraz Account</h3>
-        <div className="login-other">Already member? <a href="login">Login</a> here.</div>
+            <div className="login-title"><h3>Create your Dokan Account</h3>
+        <div className="login-other">Already member? <a href="login" className='link'>Login</a> here.</div>
         </div>
         <form onSubmit={handleSubmit}>
             <div className="mod-login">
@@ -39,7 +39,7 @@ const SignUp = () => {
                         <input onChange={getData} name='passoword' type="password" placeholder="Please enter your password" data-meta="Field" ></input>
                     </div>
                     <div className="mod-login-forgot">
-                        <a href="#">Forgot your password?</a>
+                        <a href="#" className='link'>Forgot your password?</a>
                     </div>
                 </div>
                 <div className="mod-login-col2">
@@ -50,12 +50,12 @@ const SignUp = () => {
                     <div className="mod-login-btn">
                     <button type="submit" className="mod-button signup-btn">SIGN UP</button>
                     <div>
-                        <span>By clicking "SIGN UP", I agree to Daraz's <a href="">Terms of Use</a> and <a href="">Privacy Policy</a></span>
+                        <span>By clicking "SIGN UP", I agree to Dokan's <a href="" className='link'>Terms of Use</a> and <a href="" className='link'>Privacy Policy</a></span>
                     </div>
                     </div>
                     <div className="mod-third-party-login">
                         <span>Or, sign up with</span>
-                        <div class="mod-third-party-signup-bd"><button class="mod-button-signup mod-third-party-login-fb"><FaFacebookF />Facebook</button><button class="mod-button-signup mod-third-party-login-google"><FaGooglePlusG />Google</button></div>
+                        <div class="mod-third-party-signup-bd"><button class="mod-button-signup mod-third-party-login-fb"><FaFacebookF className='d-inline'/>Facebook</button><button class="mod-button-signup mod-third-party-login-google"><FaGooglePlusG className='d-inline' />Google</button></div>
                     </div>
                 </div>
             </div>
