@@ -6,6 +6,7 @@
     const handleAddProduct = (newProduct) => {
         setProducts([...products, newProduct]);
     };
+    console.log(products)
     return (
         <div className="container mt-5">
         <h1 className='text-5xl text-center'>Admin Panel</h1>

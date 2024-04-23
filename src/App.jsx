@@ -10,6 +10,8 @@ import NotFound from './Pages/NotFound';
 import ProductPage from './Pages/ProductPage';
 import  ResellPage  from './Pages/ResellPage';
 import AdminProduct from './Pages/AdminProduct';
+import AdminHome from './Pages/AdminHome';
+import Admin from './Models/Admin';
 function App() {
   const router = createBrowserRouter([
     {
@@ -18,7 +20,8 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Home />
+          element: <Home />,
+          index:true
         },
         {
           path: "/checkout", // Define route for checkout
@@ -37,15 +40,30 @@ function App() {
         },{
           path:"/resells",
           element:<ResellPage/>
-        },{
-          path:"/addproduct",
-          element:<AdminProduct/>
         }
       ]
-    },{
+    },
+   
+    ,{
       path:"/*",
       element:<NotFound/>
+    },
+    {
+      path: "/admin",
+      element: <AdminHome/>,
+      children: [
+        {
+          path: "/admin", // Changed from "/admin" to "/"
+          element: <Admin/>, // Assuming this is the default route under "/admin"
+          index: true,
+        },
+        {
+          path: "/admin/addProduct", // Relative path to the parent route
+          element: <AdminProduct/>,
+        }
+      ]
     }
+    
   ]);
 
   return (

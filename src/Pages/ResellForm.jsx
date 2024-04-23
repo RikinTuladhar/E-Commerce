@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-
+import ResellApi from '../API/ResellApi';
 const ResellForm = () => {
+  const {postResell} = ResellApi();
+  
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -20,6 +22,11 @@ const ResellForm = () => {
     // You can handle form submission here, such as sending the data to an API
     console.log(formData);
     // Reset form after submission
+
+    postResell("/postResell").then((response)=>{
+      console.log(response);
+    }).catch((error) => console.log(error));
+
     setFormData({
       title: '',
       description: '',

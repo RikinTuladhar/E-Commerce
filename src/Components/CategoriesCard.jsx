@@ -2,7 +2,7 @@ import React from "react";
 
 const CategoriesCard = ({i}) => {
   return (
-    <div key={i} className="w-36 h-40 flex flex-col gap-2 justify-center items-center bg-[#F6F5F2]">
+    <div key={i} className=" w-36 h-40 flex flex-col gap-2 justify-center items-center bg-[#F6F5F2]">
       <div className="w-full h-auto px-2">
         <img
           style={{
