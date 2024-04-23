@@ -4,7 +4,7 @@ import ResellForm from './ResellForm';
 const ResellPage = () => {
   return (
     <div className="container py-4">
-      <h1 className="mb-4 text-center">Resell Your Products</h1>
+      <h1 className="mb-4 text-4xl text-center">Resell Your Products</h1>
       <div className="row justify-content-center">
         <div className="col-md-6">
           <ResellForm />
