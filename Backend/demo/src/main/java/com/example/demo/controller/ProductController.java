@@ -71,7 +71,11 @@ public class ProductController {
             productResponse.setDescription(productModel.getDescription());
             productResponse.setImages(productModel.getImages());
             productResponse.setPrice(productModel.getPrice());
-            productResponse.setCategoryName(categoryModel.getName());
+            if (categoryModel != null) {
+                productResponse.setCategoryName(categoryModel.getName());
+            } else {
+                productResponse.setCategoryName("Uncategorized"); // Set a default value or handle it as needed
+            }
             return ResponseEntity.ok(productResponse);
         } else {
             ErrorMessage errorMessage = new ErrorMessage("Not Found");
