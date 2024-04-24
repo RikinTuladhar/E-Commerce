@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -32,7 +33,17 @@ public class CategoryController {
         }catch (EmptyResultDataAccessException ex){
             return ResponseEntity.notFound().build();
         }
+    }
 
+    @GetMapping("/{id}")
+    ResponseEntity<Object> getCategoryById(@PathVariable int id){
+       Optional<CategoryModel> categoryModel =  categoryRepo.findById(id);
+    if (categoryModel.isPresent() ){
+        return ResponseEntity.ok(categoryModel);
+    }else {
+        ErrorMessage errorMessage = new ErrorMessage("Not Found");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+    }
     }
 
     @PostMapping

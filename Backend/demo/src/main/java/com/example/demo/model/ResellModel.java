@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name = "products")
-public class ProductModel {
+@Table(name = "Resell")
+public class ResellModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,11 +17,9 @@ public class ProductModel {
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
-    private long price;
+    private String image;
     @Column(nullable = false)
-    private String images;
-
-
-
-
+    private int price;
+    @Column(nullable = false)
+    private int usedTime;
 }

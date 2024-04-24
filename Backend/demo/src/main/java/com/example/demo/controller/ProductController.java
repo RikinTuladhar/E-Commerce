@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -37,6 +38,19 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/{id}")
+    ResponseEntity getProductById(@PathVariable int id) {
+        Optional<ProductModel> productModelOptional = productRepo.findById(id);
+        if (productModelOptional.isPresent()) {
+            return ResponseEntity.ok(productModelOptional.get());
+        } else {
+            ErrorMessage errorMessage = new ErrorMessage("Not Found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
+    }
+
+
+
 
 
     @PostMapping
