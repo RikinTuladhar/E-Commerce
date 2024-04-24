@@ -63,9 +63,16 @@ public class ProductController {
 
     @GetMapping("/{id}")
     ResponseEntity getProductById(@PathVariable int id) {
-        Optional<ProductModel> productModelOptional = productRepo.findById(id);
-        if (productModelOptional.isPresent()) {
-            return ResponseEntity.ok(productModelOptional.get());
+        ProductModel productModel = productRepo.findById(id).orElse(null);
+        if (productModel != null) {
+            ProductResponse productResponse = new ProductResponse();
+            CategoryModel categoryModel = productModel.getCategoryModel();
+            productResponse.setName(productModel.getName());
+            productResponse.setDescription(productModel.getDescription());
+            productResponse.setImages(productModel.getImages());
+            productResponse.setPrice(productModel.getPrice());
+            productResponse.setCategoryName(categoryModel.getName());
+            return ResponseEntity.ok(productResponse);
         } else {
             ErrorMessage errorMessage = new ErrorMessage("Not Found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
