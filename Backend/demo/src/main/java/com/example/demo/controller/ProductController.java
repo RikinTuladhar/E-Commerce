@@ -1,7 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ProductDto;
+import com.example.demo.dto.ProductRequest;
+import com.example.demo.dto.ProductResponse;
+import com.example.demo.model.CategoryModel;
 import com.example.demo.model.ProductModel;
+import com.example.demo.repository.CategoryRepo;
 import com.example.demo.repository.ProductRepo;
 import com.example.demo.response.ErrorMessage;
 import com.example.demo.response.Message;
@@ -24,20 +28,39 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     ProductRepo productRepo;
+    @Autowired
+    CategoryRepo categoryRepo;
 
     @GetMapping
-    ResponseEntity<Object> getproduct() {
+    ResponseEntity<Object> getProducts() {
         try {
-            List <ProductModel> productModel = productRepo.findAll();
-            if (productModel != null) {
-                return ResponseEntity.ok(productModel);
-            } else {
-                return ResponseEntity.notFound().build();
+            List<ProductModel> productModels = productRepo.findAll();
+            List<ProductResponse> productResponses = new ArrayList<>();
+            for (ProductModel product : productModels) {
+                ProductResponse productResponse = new ProductResponse();
+                productResponse.setName(product.getName());
+                productResponse.setDescription(product.getDescription());
+                productResponse.setImages(product.getImages());
+                productResponse.setPrice(product.getPrice());
+
+                // Check if categoryModel is not null before setting categoryName
+                CategoryModel categoryModel = product.getCategoryModel();
+                if (categoryModel != null) {
+                    productResponse.setCategoryName(categoryModel.getName());
+                } else {
+                    productResponse.setCategoryName("Uncategorized"); // Set a default value or handle it as needed
+                }
+
+                productResponses.add(productResponse);
             }
+            return ResponseEntity.ok(productResponses);
         } catch (EmptyResultDataAccessException ex) {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+
     @GetMapping("/{id}")
     ResponseEntity getProductById(@PathVariable int id) {
         Optional<ProductModel> productModelOptional = productRepo.findById(id);
@@ -54,16 +77,33 @@ public class ProductController {
 
 
     @PostMapping
-    public ResponseEntity<Object> postProduct(@RequestBody ProductModel productModel) {
-        if (productModel != null && areAllFieldsPresent(productModel)) {
-            productRepo.save(productModel);
-            Message message = new Message("Inserted product");
-            return ResponseEntity.ok(message);
-        } else {
-            ErrorMessage errorMessage = new ErrorMessage("Could not insert product. Please provide all fields.");
+    public ResponseEntity<Object> postProduct(@RequestBody ProductRequest productRequest) {
+        CategoryModel categoryModel =  categoryRepo.findById(productRequest.getCategoryId()).orElse(null);
+
+        if (categoryModel == null) {
+            ErrorMessage errorMessage = new ErrorMessage("Category Not Found");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+        } else {
+
+            ProductModel productModel = new ProductModel();
+            productModel.setName(productRequest.getName());
+            productModel.setDescription(productRequest.getDescription());
+            productModel.setImages(productRequest.getImages());
+            productModel.setPrice(productRequest.getPrice());
+            productModel.setCategoryModel(categoryModel);
+            if(areAllFieldsPresent(productModel)){
+                productRepo.save(productModel);
+                Message message = new Message("Inserted product");
+                return ResponseEntity.ok(message);
+            }else {
+                ErrorMessage errorMessage = new ErrorMessage("Could not insert product. Please provide all fields.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+            }
+
         }
     }
+
+
 
     private boolean areAllFieldsPresent(ProductModel productModel) {
         return productModel.getName() != null && !productModel.getName().isEmpty()

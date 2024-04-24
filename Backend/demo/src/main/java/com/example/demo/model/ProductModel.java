@@ -21,6 +21,12 @@ public class ProductModel {
     @Column(nullable = false)
     private String images;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryModel categoryModel;
+
+
+
 
 
 
