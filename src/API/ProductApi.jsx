@@ -2,12 +2,15 @@ import axios from "axios";
 import React from "react";
 
 const ProductApi = () => {
-  const base = "http://localhost:8080";
+  const base = "https://e-commerce-strv.onrender.com";
 
   const getProduct = async (endpoint) => {
+    const url = base + endpoint;
+    console.log(url)
     try {
-      const response = await axios.get(endpoint);
+      const response = await axios.get(url);
       const data = await response.data;
+      console.log(data)
       return data;
     } catch (error) {
       console.log("Error while fetching product data" + error);

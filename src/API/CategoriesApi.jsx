@@ -1,30 +1,30 @@
-import axios from 'axios';
-import React from 'react'
+import axios from "axios";
+import React from "react";
 
 const CategoriesApi = () => {
-  const base = "http://localhost:8080"
-  const getCategories =(endpoint)=>{
+  const base = "https://e-commerce-strv.onrender.com";
+  const getCategories = (endpoint) => {
     const url = base + endpoint;
     try {
-        const response = axios.get(url);
-        const data = response.data;
-        return data;
+      const response = axios.get(url);
+      const data = response.data;
+      return data;
     } catch (error) {
-        console.error("Error while fetching categories " + error);
+      console.error("Error while fetching categories " + error);
     }
-  }
-  const postCategory = (endpoint,data)=>{
+  };
+  const postCategory = (endpoint, data) => {
     const url = base + endpoint;
     try {
-        const response = axios.post(url,data);
-        const data = response.data;
-        return data; 
+      const response = axios.post(url, data);
+      const data = response.data;
+      return data;
     } catch (error) {
-        console.error("Error while posting categories " + error);
+      console.error("Error while posting categories " + error);
     }
-  }
-  
-    return{getCategories,postCategory}
-}
+  };
 
-export default CategoriesApi
+  return { getCategories, postCategory };
+};
+
+export default CategoriesApi;
