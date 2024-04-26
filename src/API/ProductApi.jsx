@@ -16,17 +16,25 @@ const ProductApi = () => {
       console.log("Error while fetching product data" + error);
     }
   };
-
-  const postProduct = async (endpoint, data) => {
-    const url = base + endpoint;
-    try {
-      const response = await axios.post(url, data);
-      const data = await response.data;
-      return data;
-    } catch (error) {
-      console("Error while posting product" + error.message);
+  
+  const postProduct = async (endpoint,data) =>{
+    let url = `${base}${endpoint}`;
+    console.log(url);
+    console.log(data);
+    // console.log(url);
+    try
+    {
+      let response = await axios.post(url,data);
+      const postdata = await response.data;
+      console.log(postdata);
+      return postdata;
+    }catch(ex){
+      return ex;
     }
-  };
+  
+
+  }
+
 
   return { getProduct, postProduct };
 };
