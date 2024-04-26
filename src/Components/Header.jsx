@@ -6,8 +6,8 @@ const Header = () => {
     <div>
       <header className="py-3 header border-bottom">
         <div className="container flex-wrap d-flex justify-content-center align-items-center">
-          <Link to={"/"}
-           
+          <Link
+            to={"/"}
             className="mb-3 d-flex align-items-center mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none"
           >
             <img
@@ -39,7 +39,8 @@ const Header = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/products"}
+                <Link
+                  to={"/products"}
                   href="./Features"
                   className="px-2 nav-link link-body-emphasis"
                 >
@@ -47,7 +48,8 @@ const Header = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/resells"}
+                <Link
+                  to={"/resells"}
                   href="./Product"
                   className="px-2 nav-link link-body-emphasis"
                 >
@@ -56,9 +58,13 @@ const Header = () => {
               </li>
 
               <li className="nav-item">
-                <a href="#" className="px-2 nav-link link-body-emphasis">
-                  About
-                </a>
+                <Link
+                  to={"/categories"}
+                  href="./categories"
+                  className="px-2 nav-link link-body-emphasis"
+                >
+                  Category
+                </Link>
               </li>
             </ul>
             <ul className="nav">

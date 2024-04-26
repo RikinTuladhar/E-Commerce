@@ -2,21 +2,21 @@ import axios from "axios";
 import React from "react";
 
 const CategoriesApi = () => {
-  const base = "https://e-commerce-strv.onrender.com";
-  const getCategories = (endpoint) => {
+  const base = "https://e-com-7w8l.onrender.com";
+  const getCategories = async (endpoint) => {
     const url = base + endpoint;
     try {
-      const response = axios.get(url);
+      const response = await axios.get(url);
       const data = response.data;
       return data;
     } catch (error) {
       console.error("Error while fetching categories " + error);
     }
   };
-  const postCategory = (endpoint, data) => {
+  const postCategory = async (endpoint, data) => {
     const url = base + endpoint;
     try {
-      const response = axios.post(url, data);
+      const response = await axios.post(url, data);
       const data = response.data;
       return data;
     } catch (error) {

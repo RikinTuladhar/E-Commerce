@@ -4,7 +4,7 @@ import React from "react";
 // A custom hook for interacting with the Resell API
 const ResellApi = () => {
   // The base URL for the Resell API
-  const base = "http://localhost:8080";
+  const base = "https://e-com-7w8l.onrender.com";
 
   // A function to fetch data from the Resell API
   // @param {string} endpoint - The endpoint to fetch data from

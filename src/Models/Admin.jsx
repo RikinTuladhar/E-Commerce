@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import AdminDashboard from "../Pages/AdminDashboard";
 
 const Admin = () => {
   return (
     <div>
-      DashBoard
+      <AdminDashboard />
     </div>
-  )
-}
+  );
+};
 
-export default Admin
+export default Admin;
