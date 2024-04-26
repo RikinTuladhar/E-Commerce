@@ -3,7 +3,7 @@ import React from "react";
 function AdminFooter() {
   return (
     <div>
-      <div className="row">
+      <div className="row mt-9">
         <div className="text-center col">
           <p className="mb-0 text-muted">&copy; Dokan, All Rights Reserved</p>
           <p className="mb-0 text-muted">

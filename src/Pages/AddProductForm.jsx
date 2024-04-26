@@ -1,4 +1,5 @@
 // src/components/ProductForm.js
+<<<<<<< Updated upstream:src/Pages/ProductForm.jsx
 import React, { useEffect, useState } from "react";
 import ProductApi from "../API/ProductApi";
 import CategoriesApi from "../API/CategoriesApi";
@@ -9,6 +10,15 @@ const ProductForm = () => {
   const { postProduct } = ProductApi();
 
   const { reload, setReload } = useOutletContext();
+=======
+import React, { useState } from "react";
+
+const AddProductForm = ({ onAdd }) => {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+>>>>>>> Stashed changes:src/Pages/AddProductForm.jsx
 
   const [category, setCategory] = useState([]);
 
@@ -47,6 +57,7 @@ const ProductForm = () => {
     }
   };
 
+<<<<<<< Updated upstream:src/Pages/ProductForm.jsx
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,6 +83,27 @@ const ProductForm = () => {
     });
     alert("Inserted")
     
+=======
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Basic validation
+    if (!name || !price || !description || !image) {
+      alert("Please fill in all fields");
+      return;
+    }
+    const newProduct = {
+      name: name,
+      price: parseFloat(price), // Convert to number
+      description: description,
+      image: image,
+    };
+    onAdd(newProduct);
+    // Clear the form after adding
+    setName("");
+    setPrice("");
+    setDescription("");
+    setImage(null);
+>>>>>>> Stashed changes:src/Pages/AddProductForm.jsx
   };
 
   return (
@@ -134,4 +166,4 @@ const ProductForm = () => {
   );
 };
 
-export default ProductForm;
+export default AddProductForm;
