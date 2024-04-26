@@ -38,6 +38,7 @@ public class ProductController {
             List<ProductResponse> productResponses = new ArrayList<>();
             for (ProductModel product : productModels) {
                 ProductResponse productResponse = new ProductResponse();
+                productResponse.setId(product.getId());
                 productResponse.setName(product.getName());
                 productResponse.setDescription(product.getDescription());
                 productResponse.setImages(product.getImages());
@@ -67,6 +68,7 @@ public class ProductController {
         if (productModel != null) {
             ProductResponse productResponse = new ProductResponse();
             CategoryModel categoryModel = productModel.getCategoryModel();
+            productResponse.setId(productModel.getId());
             productResponse.setName(productModel.getName());
             productResponse.setDescription(productModel.getDescription());
             productResponse.setImages(productModel.getImages());
