@@ -25,7 +25,7 @@ const Card = ({ product }) => {
           </div>
           <div className="w-full pl-5 ">
             <button className="btn btn-primary">
-              <Link to={`./products/${product.id}`}>Read More</Link>
+              <Link to={`/products/${product.id}`}>Read More</Link>
             </button>
           </div>
         </div>
