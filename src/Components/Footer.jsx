@@ -5,7 +5,7 @@ const Footer = () => {
    
 
 <footer class=" bg-white dark:bg-gray-900">
-    <div class="mx-auto w-full max-w-screen-xl">
+    <div class=" w-full ">
     <div class="px-4 py-6 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between">
         <span class="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2024<a href="https://flowbite.com/">Dokan™</a>. All Rights Reserved.
         </span>

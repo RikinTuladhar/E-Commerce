@@ -26,9 +26,9 @@ const ProductDescription = () => {
   return (
     <>
       <Helmet>
-        <title>{product ? product.title : "Product Description"}</title>
+        <title>{product ? product.name : "Product Title"}</title>
       </Helmet>
-      <div className="container">
+      <div>
         {loading ? (
           <div
             className="d-flex justify-content-center align-items-center"
@@ -47,29 +47,42 @@ const ProductDescription = () => {
             </div>
           </div>
         ) : (
-          <div className="mb-3 card">
-            <div className="row g-0">
-              <div className="col-md-4">
-                <div className="card-body">
-                  {/* Check if product exists before accessing its properties */}
-                  {product && (
-                    <>
-                      <h5 className="card-title">{product.name}</h5>
-                      <h1>
-                        <strong>${product.price}</strong>
-                      </h1>
-                      <p className="card-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-                    </>
-                  )}
-                  <Link to="/" className="btn btn-primary">
-                    Go back
-                  </Link>
+          <div className=" w-full min-h-[100vh] px-10 py-5 bg-[#d4d4d4] flex justify-center items-center">
+            {/* card  */}
+            <div className="w-[95%] md:w-[80%] flex flex-wrap  bg-[#d6d3d1]">
+              {/* left  */}
+              <div className="w-full md:w-[40%]  bg-[#e7e5e4]">
+                <img
+                  src="Images/ImageNotFound.jpg"
+                  alt="image of product"
+                  className="object-cover w-full h-full"
+                  onError={(e) => (e.target.src = "/Images/ImageNotFound.jpg")}
+                />
+              </div>
+              {/* right  */}
+              <div className=" w-full md:w-[60%] items-center flex flex-col ">
+                <div className="w-full border-b-4  flex justify-center  pl-5 flex-col gap-3 h-[30%] bg-[#e7e5e4]">
+                  <div className="text-2xl md:text-4xl">{product.name}</div>
+                  <div className="text-xs"> Rating</div>
                 </div>
-                <div className="m-3">
-                  <button className="btn btn-primary" onClick="/*{addtoCart}*/">
-                    Add to cart
+                <div className="w-full  pb-5 flex flex-col gap-5 pl-3 pt-2 bg-[#f5f5f5] ">
+                  <div className="flex flex-wrap gap-2 text-base md:text-xl">
+                    <div>Rs:</div> <div>{product.price}</div>
+                  </div>
+                  <div className="text-base">
+                    <div>Description:</div> <div>{product.description}</div>
+                  </div>
+                  <div className="relative flex flex-wrap gap-2 text-base">
+                    {" "}
+                    <div>Category:</div> <div>{product.categoryName}</div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap items-center pb-5 md:pb-2  bg-[#e5e5e5] justify-center w-full gap-5 pt-10 text-base md:text-xl">
+                  <button className="bg-[#525252] rounded-md px-2 py-1 md:px-3 md:py-2 border">
+                    Add To Cart{" "}
+                  </button>
+                  <button className="bg-[#a1a1aa] px-2 py-1  rounded-sm md:px-3 md:py-2 border">
+                    Buy Now{" "}
                   </button>
                 </div>
               </div>
