@@ -53,9 +53,9 @@ const ProductDescription = () => {
               {/* left  */}
               <div className="w-full md:w-[40%]  bg-[#e7e5e4]">
                 <img
-                  src="Images/ImageNotFound.jpg"
+                  src={product.images}
                   alt="image of product"
-                  className="object-cover w-full h-full"
+                  className="object-contain w-full h-full"
                   onError={(e) => (e.target.src = "/Images/ImageNotFound.jpg")}
                 />
               </div>
