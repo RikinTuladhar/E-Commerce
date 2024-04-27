@@ -10,12 +10,13 @@ const Card = ({ product }) => {
         >
           <div className="w-full h-[50%]">
             <img
-              src=""
+              src= {product.images}
               alt="img"
               style={{
                 width: "100%",
                 height: "100%",
                 borderEndEndRadius: "10px",
+                objectFit:"cover"
               }}
               onError={(e) => (e.target.src = "Images/ImageNotFound.jpg")}
             />

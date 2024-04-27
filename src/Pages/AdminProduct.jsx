@@ -20,7 +20,7 @@ const AdminProduct = () => {
       });
   }, []);
 
-  console.log(products);
+ 
   return (
     <div className="container mt-5">
       <AddProductForm />
