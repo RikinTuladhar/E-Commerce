@@ -6,8 +6,10 @@ Admin Add Product Page
 import React, { useEffect, useState } from "react";
 import AddProductForm from "./ProductForm";
 import ProductApi from "../API/ProductApi";
+import { useOutletContext } from "react-router-dom";
 
 const AdminProduct = () => {
+  const { reload, setReload } = useOutletContext();
   const { getProduct } = ProductApi();
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -18,7 +20,7 @@ const AdminProduct = () => {
       .catch((er) => {
         console.log(er);
       });
-  }, []);
+  }, [reload]);
 
  
   return (

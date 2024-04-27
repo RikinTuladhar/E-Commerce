@@ -6,7 +6,9 @@ import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import CategoriesApi from "../API/CategoriesApi"
 import axios from "axios";
+import { useOutletContext } from "react-router-dom";
 const ProductForm = ({ onAdd }) => {
+  const { reload, setReload } = useOutletContext();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -67,6 +69,7 @@ const ProductForm = ({ onAdd }) => {
               .then((res) => {
                 alert(res.data.message);
                 console.log(res.data.message);
+                setReload(!reload)
               })
               .catch((err) => {
                 alert(err);
@@ -89,7 +92,7 @@ const ProductForm = ({ onAdd }) => {
     }).catch((err)=>{
       console.log(err);
     })
-  },[])
+  },[reload])
 
   return (
     <div className="container mt-4">
