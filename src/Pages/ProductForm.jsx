@@ -63,12 +63,11 @@ const ProductForm = ({ onAdd }) => {
               images: url,
               categoryId: categoryId
             };
-            console.log(newProduct);
+            
             return axios
               .post("https://e-com-7w8l.onrender.com/products", newProduct)
               .then((res) => {
                 alert(res.data.message);
-                console.log(res.data.message);
                 setReload(!reload)
               })
               .catch((err) => {
