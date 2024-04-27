@@ -4,7 +4,7 @@ Admin Add Product Page
 
 */
 import React, { useEffect, useState } from "react";
-import AddProductForm from "./ProductForm";
+import ProductForm from "./ProductForm";
 import ProductApi from "../API/ProductApi";
 import { useOutletContext } from "react-router-dom";
 
@@ -22,18 +22,17 @@ const AdminProduct = () => {
       });
   }, [reload]);
 
- 
   return (
     <div className="container mt-5">
-      <AddProductForm />
+      <ProductForm />
       <hr />
       <div className="mt-9 form-setcion">
         <h2 className="text-3xl text-center">Products</h2>
         <ul className="list-group">
           {products.map((product, index) => (
             <li key={index} className="list-group-item">
-              <strong>{product.name}</strong><br /> Rs- ${product.price.toFixed(2)}{" "}
-              <br />
+              <strong>{product.name}</strong>
+              <br /> Rs- ${product.price.toFixed(2)} <br />
               Category Name: {product.categoryName}
               <br />
               {product.description}

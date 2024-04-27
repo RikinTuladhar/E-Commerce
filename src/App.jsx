@@ -14,6 +14,7 @@ import AdminHome from "./Pages/AdminHome";
 import Admin from "./Models/Admin";
 import CategoriesContainer from "./Models/CategoriesContainer";
 import ProductDescription from "./Pages/ProductDescription";
+import Category from "./Pages/Category";
 function App() {
   const router = createBrowserRouter([
     {
@@ -76,8 +77,8 @@ function App() {
           element: <AdminProduct />,
         },
         {
-          path: "/admin/", // Relative path to the parent route
-          element: <AdminProduct />,
+          path: "/admin/addCategory", // Relative path to the parent route
+          element: <Category />,
         },
       ],
     },
