@@ -1,48 +1,99 @@
 // src/components/ProductForm.js
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from "react";
+import ProductApi from "../API//ProductApi";
+import { storage } from "../Firebase/firebase";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import CategoriesApi from "../API/CategoriesApi"
+import axios from "axios";
 const ProductForm = ({ onAdd }) => {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const[image,setImage]=useState('');
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState(null);
+  const [categoryId,setCategoryId] = useState(null);
+  const [filePreview, setFilePreview] = useState(null);
+  const imageListRef = ref(storage, "images/");
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+  const [category,setCategory] = useState([]);
+
+  const { postProduct } = ProductApi();
+  const {getCategories} = CategoriesApi();
+
+  const handleFile = (e) => {
+    // console.log(e.target.files);
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result);
+
+      reader.onloadend = () => {
+        setFile(selectedFile);
+        setFilePreview(reader.result);
       };
-      reader.readAsDataURL(file);
+
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setFile(null);
+      setFilePreview(null);
     }
   };
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Basic validation
-    if (!name || !price || !description || !image) {
-      alert('Please fill in all fields');
+  
+    if (!name || !price || !description || !file) {
+      // Basic validation
+      alert("Please fill in all fields");
       return;
     }
-    const newProduct = {
-      name: name,
-      price: parseFloat(price), // Convert to number
-      description: description,
-      image:image,
-    };
-    onAdd(newProduct);
+  
+    const imageRef = ref(storage, `images/${file.name + v4()}`);
+    uploadBytes(imageRef, file)
+      .then((snapshot) => {
+        getDownloadURL(snapshot.ref)
+          .then((url) => {
+            console.log(url);
+            const newProduct = {
+              name: name,
+              price: parseFloat(price), // Convert to number
+              description: description,
+              images: url,
+              categoryId: categoryId
+            };
+            console.log(newProduct);
+            return axios
+              .post("https://e-com-7w8l.onrender.com/products", newProduct)
+              .then((res) => {
+                alert(res.data.message);
+                console.log(res.data.message);
+              })
+              .catch((err) => {
+                alert(err);
+              });
+          })
+          .catch((err) => console.log(err));
+      });
+    
     // Clear the form after adding
-    setName('');
-    setPrice('');
-    setDescription('');
-    setImage(null);
+    setName("");
+    setPrice("");
+    setDescription("");
+    setFile(null);
   };
+
+  useEffect(()=>{
+    getCategories("/category").then((res)=>{
+      setCategory(res);
+      console.log(res);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  },[])
 
   return (
     <div className="container mt-4">
-      <h2 className='text-3xl text-center text-cyan-500'>Add Product</h2>
+      <h2 className="text-3xl text-center text-cyan-500">Add Product</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Name</label>
@@ -69,7 +120,7 @@ const ProductForm = ({ onAdd }) => {
             type="file"
             accept="image/*"
             className="form-control"
-            onChange={handleImageChange}
+            onChange={handleFile}
           />
         </div>
         <div className="mb-3">
@@ -80,6 +131,18 @@ const ProductForm = ({ onAdd }) => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
+        <div className="mb-3">
+          <label className="form-label">Category</label>
+         <select name="" onChange={e => setCategoryId(e.target.value)} id="">
+          <option value="" selected  disabled>Select Category</option>
+          {
+             category.map((category)=>(
+               <option key={category.id} value={category.id}>{category.name}</option>
+             ))
+          }
+         </select>
+        </div>
+       
         <button type="submit" className="btn btn-primary">
           Add Product
         </button>

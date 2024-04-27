@@ -3,32 +3,41 @@
 Admin Add Product Page
 
 */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddProductForm from "./ProductForm";
+import ProductApi from "../API/ProductApi";
 
 const AdminProduct = () => {
+  const { getProduct } = ProductApi();
   const [products, setProducts] = useState([]);
-  const handleAddProduct = (newProduct) => {
-    setProducts([...products, newProduct]);
-  };
+  useEffect(() => {
+    getProduct("/products")
+      .then((res) => {
+        setProducts(res);
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+  }, []);
+
   console.log(products);
   return (
     <div className="container mt-5">
-      <AddProductForm onAdd={handleAddProduct} />
+      <AddProductForm />
       <hr />
       <div className="mt-9 form-setcion">
         <h2 className="text-3xl text-center">Products</h2>
         <ul className="list-group">
           {products.map((product, index) => (
             <li key={index} className="list-group-item">
-              <strong>{product.name}</strong> - ${product.price.toFixed(2)}{" "}
+              <strong>{product.name}</strong><br /> Rs- ${product.price.toFixed(2)}{" "}
               <br />
-              {product.category}
+              Category Name: {product.categoryName}
               <br />
               {product.description}
-              {product.image && (
+              {product.images && (
                 <img
-                  src={product.image}
+                  src={product.images}
                   alt={product.name}
                   className="h-40 mt-3 w-30 bg-slate-950"
                 />
