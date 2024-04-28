@@ -22,6 +22,42 @@ const ProductDescription = () => {
         setLoading(false); // Set loading to false in case of error
       });
   }, [id]);
+  // Generate random ratings and reviews
+  const generateRandomRatingsAndReviews = (count) => {
+    const ratings = [];
+    const reviews = [];
+    for (let i = 0; i < count; i++) {
+      // Generate random rating between 1 and 5
+      const rating = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+      // Generate random review from an array of sample reviews
+      const sampleReviews = [
+        "Great product, highly recommended!",
+        "Average quality, but worth the price.",
+        "Disappointed with the product, would not buy again.",
+        "Excellent product! Will definitely buy again.",
+        "Not as expected, but still okay.",
+      ];
+      const review =
+        sampleReviews[Math.floor(Math.random() * sampleReviews.length)];
+      ratings.push(rating);
+      reviews.push(review);
+    }
+    return { ratings, reviews };
+  };
+
+  // Render stars based on rating
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(<i key={i} className="text-yellow-500 fas fa-star"></i>);
+    }
+    for (let i = rating; i < 5; i++) {
+      stars.push(<i key={i} className="text-gray-300 far fa-star"></i>);
+    }
+    return stars;
+  };
+
+  const { ratings, reviews } = generateRandomRatingsAndReviews(5); // Generate 5 random ratings and reviews
 
   return (
     <>
@@ -78,10 +114,10 @@ const ProductDescription = () => {
                   </div>
                 </div>
                 <div className="flex flex-wrap items-center pb-5 md:pb-2  bg-[#e5e5e5] justify-center w-full gap-5 pt-10 text-base md:text-xl">
-                  <button className="bg-[#525252] rounded-md px-2 py-1 md:px-3 md:py-2 border">
+                  <button className="px-2 py-1 border rounded-md btn btn-primary md:px-3 md:py-2">
                     Add To Cart{" "}
                   </button>
-                  <button className="bg-[#a1a1aa] px-2 py-1  rounded-sm md:px-3 md:py-2 border">
+                  <button className="px-2 py-1 border rounded-sm btn btn-warning md:px-3 md:py-2">
                     Buy Now{" "}
                   </button>
                 </div>
@@ -89,6 +125,21 @@ const ProductDescription = () => {
             </div>
           </div>
         )}
+      </div>
+      <div className="container mt-4">
+        <h2 className="text-3xl text-center text-cyan-500">
+          Reviews and Ratings
+        </h2>
+        <div className="flex items-center justify-between text-xs">
+          <div>Ratings: 5*</div>
+        </div>
+        <div className="mt-3">
+          {reviews.map((review, index) => (
+            <div key={index} className="mb-2">
+              <p className="text-base">{review}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
