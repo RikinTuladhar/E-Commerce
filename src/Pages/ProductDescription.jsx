@@ -130,12 +130,15 @@ const ProductDescription = () => {
         <h2 className="text-3xl text-center text-cyan-500">
           Reviews and Ratings
         </h2>
-        <div className="flex items-center justify-between text-xs">
-          <div>Ratings: 5*</div>
-        </div>
         <div className="mt-3">
           {reviews.map((review, index) => (
             <div key={index} className="mb-2">
+              <h1 className="text-2xl">User {index + 1}</h1>
+              <div className="flex items-center">
+                <div className="flex mr-2 size-4">
+                  {renderStars(ratings[index])}
+                </div>
+              </div>
               <p className="text-base">{review}</p>
             </div>
           ))}

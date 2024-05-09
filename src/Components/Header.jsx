@@ -10,14 +10,8 @@ const Header = () => {
             to={"/"}
             className="mb-3 d-flex align-items-center mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none"
           >
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              class="h-8"
-              alt="Flowbite Logo"
-            />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap">
-              Dokan
-            </span>{" "}
+            <img src="/Images/Dokan.png" class="h-8" alt="Dokan Logo" />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap"></span>{" "}
           </Link>
           <form className="mb-3 col-12 col-lg-auto mb-lg-0" role="search">
             <input
