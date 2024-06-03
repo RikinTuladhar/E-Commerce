@@ -116,8 +116,6 @@ public class ProductController {
         }
     }
 
-
-
     private boolean areAllFieldsPresent(ProductModel productModel) {
         return productModel.getName() != null && !productModel.getName().isEmpty()
                 && productModel.getDescription() != null && !productModel.getDescription().isEmpty()

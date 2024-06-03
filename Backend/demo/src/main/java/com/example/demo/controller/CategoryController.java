@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.CategoryModel;
+import com.example.demo.model.ProductModel;
 import com.example.demo.repository.CategoryRepo;
+import com.example.demo.repository.ProductRepo;
 import com.example.demo.response.ErrorMessage;
 import com.example.demo.response.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import java.util.Optional;
 public class CategoryController {
     @Autowired
     CategoryRepo categoryRepo;
+    @Autowired
+    ProductRepo productRepo;
 
     @GetMapping
     ResponseEntity<Object> getCategory(){
@@ -35,6 +39,25 @@ public class CategoryController {
         }
     }
 
+    @GetMapping("/getProduct/{id}")
+    ResponseEntity<?> getProductsByCategoryId(@PathVariable("id")Integer id){
+        if(id != null){
+        Optional<CategoryModel> categoryModel = categoryRepo.findById(id);
+        if(categoryModel.isPresent()){
+            List<ProductModel> productModel = productRepo.findProductsByCategoryId(id);
+            return  ResponseEntity.ok(productModel);
+
+        }else{
+            ErrorMessage errorMessage = new ErrorMessage("Category Not Found");
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+        }else {
+            ErrorMessage errorMessage = new ErrorMessage("Id not inserted");
+            return  ResponseEntity.badRequest().body(errorMessage);
+        }
+
+    }
+
     @GetMapping("/{id}")
     ResponseEntity<Object> getCategoryById(@PathVariable int id){
        Optional<CategoryModel> categoryModel =  categoryRepo.findById(id);
@@ -49,9 +72,17 @@ public class CategoryController {
     @PostMapping
     ResponseEntity<Object> postCategory(@RequestBody CategoryModel categoryModel){
       if(allFieldsPresent(categoryModel)){
-          categoryRepo.save(categoryModel);
-          Message message = new Message("Insted Category");
-          return  ResponseEntity.ok(message);
+          Integer count= categoryRepo.countByName(categoryModel.getName());
+          System.out.println(count);
+          if(count > 0){
+              ErrorMessage errorMessage = new ErrorMessage("Already Exist");
+              return ResponseEntity.badRequest().body(errorMessage);
+          }else {
+              categoryRepo.save(categoryModel);
+              Message message = new Message("Insted Category");
+              return  ResponseEntity.ok(message);
+          }
+
 
       }else {
           ErrorMessage errorMessage = new ErrorMessage("Could not insert category. Please provide all fields.");
@@ -62,9 +93,5 @@ public class CategoryController {
 //        name != null -> true &&  name == "" -> flase -> ! -> true = true
         return categoryModel.getName() != null && !categoryModel.getName().isEmpty();
     }
-
-
-
-
 
 }

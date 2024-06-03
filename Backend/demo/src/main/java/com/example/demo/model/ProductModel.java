@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class ProductModel {
     @Column(nullable = false)
     private String images;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")
     private CategoryModel categoryModel;

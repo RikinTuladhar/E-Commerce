@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/resell")
@@ -23,12 +24,11 @@ public class ResellController {
     ResponseEntity<Object> getResell (){
        try {
            List<ResellModel> resellModel =  resellRepo.findAll();
-           if(resellModel != null){
+           if (!resellModel.isEmpty()) {
                return ResponseEntity.ok(resellModel);
-           }else {
+           } else {
                return ResponseEntity.notFound().build();
            }
-
        }catch (EmptyResultDataAccessException ex){
            ErrorMessage errorMessage = new ErrorMessage("Not Found");
            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
